@@ -1,0 +1,39 @@
+{
+   "kinesis.endpoint": "https://kinesis.eu-west-1.amazonaws.com",
+   "awsAccessKeyId": "<< access key id >>",
+   "awsSecretAccessKey": "<< secret access key >>",
+   "flows": [
+      {
+         "filePattern": "/usr/src/app/logs/transactions*.log",
+         "kinesisStream": "transactions",
+         "dataProcessingOptions": [
+            {
+               "optionName": "CSVTOJSON",
+               "customFieldNames": [
+                  "transactionTs",
+                  "transactionId",
+                  "customerId",
+                  "cardNumber",
+                  "atmId",
+                  "amount"
+               ],
+               "delimiter": ";"
+            }
+         ]
+      },
+      {
+         "filePattern": "/usr/src/app/logs/locked-cards*.log",
+         "kinesisStream": "locked-cards",
+         "dataProcessingOptions": [
+            {
+               "optionName": "CSVTOJSON",
+               "customFieldNames": [
+                  "customerId",
+                  "cardNumber"
+               ],
+               "delimiter": ";"
+            }
+         ]
+      }
+   ]
+}

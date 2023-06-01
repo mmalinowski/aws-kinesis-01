@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  transactions-service:
+    container_name: transactions-service
+    build:
+      context: ./transactions-service
+      dockerfile: Dockerfile
+    image: transactions-service:latest
+    networks:
+      - transactions-network   
+networks: 
+  transactions-network: 
+    driver: bridge
+volumes:
+  cache:
+    driver: local
